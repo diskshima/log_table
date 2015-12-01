@@ -1,5 +1,7 @@
 # LogTable
 
+[<img src="https://secure.travis-ci.org/diskshima/log_table.png?branch=master" />](http://travis-ci.org/diskshima/log_table)
+
 The LogTable gem will read your Active Record model and generate a  table to store logs to.
 It will additionally create triggers which will do the actual saving into the log table.
 
