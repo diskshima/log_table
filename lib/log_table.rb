@@ -5,7 +5,7 @@
 # Distributed under terms of the MIT license.
 #
 
-require "log_table/version"
+require 'log_table/version'
 require 'hairtrigger'
 
 module LogTable

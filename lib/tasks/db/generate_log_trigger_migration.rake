@@ -1,5 +1,3 @@
-require 'log_trigger'
-
 namespace :db do
   desc 'Create a migration to generate log triggers'
   task generate_log_trigger_migration: :environment do
@@ -17,7 +15,7 @@ namespace :db do
 
   def include_log_triggers(clazz)
     clazz.class_eval do
-      include LogTrigger
+      include LogTable
       add_log_trigger
     end
   end

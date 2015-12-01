@@ -1,4 +1,5 @@
 require 'ostruct'
+require 'erb'
 
 namespace :db do
   desc 'Create a database migration for log tables'
