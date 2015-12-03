@@ -82,6 +82,15 @@ class LogTableTest < Minitest::Test
     result.count == 1
   end
 
+  def table_has_column?(table_name, column_name)
+    result = ActiveRecord::Base.connection.raw_connection.execute2(
+      "SELECT * FROM #{table_name}")
+
+    col_names = result.first
+
+    col_names.include? column_name
+  end
+
   def test_that_it_has_a_version_number
     refute_nil ::LogTable::VERSION
   end
@@ -103,6 +112,7 @@ class LogTableTest < Minitest::Test
     run_generated_migration
 
     assert table_exists?('users_log')
+    assert table_has_column?('users_log', LogTable::LogStatus::STATUS_COLUMN_NAME)
 
     has_comment = false
     File.foreach(last_migration_file) do |line|

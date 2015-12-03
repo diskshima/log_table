@@ -1,5 +1,6 @@
 require 'ostruct'
 require 'erb'
+require 'log_table'
 
 namespace :db do
   desc 'Create a database migration for log tables'
@@ -31,13 +32,18 @@ namespace :db do
       table = OpenStruct.new
       table.model_id_col_name = "#{clazz.name.underscore}_id"
 
-      table.attributes = clazz.columns.map do |col|
-        if col.name == 'id'
-          OpenStruct.new(name: table.model_id_col_name, type: :integer)
-        else
-          col
+      cols = [OpenStruct.new(name: LogTable::LogStatus::STATUS_COLUMN_NAME,
+        type: :string)]
+
+      cols += clazz.columns.map do |col|
+          if col.name == 'id'
+            OpenStruct.new(name: table.model_id_col_name, type: :integer)
+          else
+            col
+          end
         end
-      end
+
+      table.attributes = cols
 
       table.name = "#{clazz.table_name}_log"
       tables << table
