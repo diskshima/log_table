@@ -23,7 +23,12 @@ Or install it yourself as:
 
 ## Usage
 
-WIP
+After installing the gem, you will need to run the below two Rake tasks
+
+    $ bundle exec rake db:generate_log_table_migration MODEL=MODEL1,MODEL2,...
+    $ bundle exec rake db:generate_log_trigger_migration MODEL=MODEL1,MODEL2,...
+
+The first will generate a migration which will generate the log tables and the second will generate a migration for the triggers.
 
 ## Contributing
 
