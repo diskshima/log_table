@@ -7,6 +7,7 @@
 
 require 'log_table/version'
 require 'hairtrigger'
+require 'log_table/railtie' if defined?(Rails::Railtie)
 
 module LogTable
   module LogStatus
