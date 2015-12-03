@@ -4,7 +4,7 @@ require 'log_table'
 
 namespace :db do
   desc 'Create a database migration for log tables'
-  task generate_log_table: :environment do
+  task generate_log_table_migration: :environment do
     args = ENV['MODEL']
 
     unless args

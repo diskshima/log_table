@@ -65,7 +65,7 @@ class LogTableTest < Minitest::Test
 
   def execute_log_table_migration
     ENV['MODEL'] = 'User'
-    Rake::Task['db:generate_log_table'].execute
+    Rake::Task['db:generate_log_table_migration'].execute
   end
 
   def last_migration_file
