@@ -36,9 +36,9 @@ class LogTableTest < Minitest::Test
   end
 
   def teardown
+    rollback_migrations
     FileUtils.rm_rf(TMP_MIGRATIONS_PATH)
     FileUtils.rm_rf(MIGRATE_DIR)
-    File.delete(DB_FILE) if File.exists?(DB_FILE)
   end
 
   def migrate_db
@@ -49,6 +49,13 @@ class LogTableTest < Minitest::Test
   def run_generated_migration
     ActiveRecord::Migration.verbose = false
     ActiveRecord::Migrator.migrate(MIGRATE_DIR)
+  end
+
+  def rollback_migrations
+    ActiveRecord::Migration.verbose = false
+    all_migration_paths = [TMP_MIGRATIONS_PATH, MIGRATE_DIR]
+    steps = ActiveRecord::Migrator.migrations(all_migration_paths).count
+    ActiveRecord::Migrator.rollback(all_migration_paths, steps)
   end
 
   def execute_log_trigger_migration
@@ -96,5 +103,13 @@ class LogTableTest < Minitest::Test
     run_generated_migration
 
     assert table_exists?('users_log')
+
+    has_comment = false
+    File.foreach(last_migration_file) do |line|
+      has_comment = line.include? 'Generated'
+      return if has_comment
+    end
+
+    assert has_comment
   end
 end
