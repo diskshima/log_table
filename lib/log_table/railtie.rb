@@ -14,7 +14,7 @@ module LogTable
     railtie_name :log_table
 
     rake_tasks do
-      load 'tasks/db/generate_log_table.rake'
+      load 'tasks/db/generate_log_table_migration.rake'
       load 'tasks/db/generate_log_trigger_migration.rake'
     end
   end
