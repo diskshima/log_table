@@ -32,7 +32,7 @@ namespace :db do
       table = OpenStruct.new
       table.model_id_col_name = "#{clazz.name.underscore}_id"
 
-      cols = [OpenStruct.new(name: LogTable::LogStatus::STATUS_COLUMN_NAME,
+      cols = [OpenStruct.new(name: LogTable::STATUS_COLUMN_NAME,
         type: :string)]
 
       cols += clazz.columns.map do |col|

@@ -112,7 +112,7 @@ class LogTableTest < Minitest::Test
     run_generated_migration
 
     assert table_exists?('users_log')
-    assert table_has_column?('users_log', LogTable::LogStatus::STATUS_COLUMN_NAME)
+    assert table_has_column?('users_log', LogTable::STATUS_COLUMN_NAME)
 
     has_comment = false
     File.foreach(last_migration_file) do |line|
